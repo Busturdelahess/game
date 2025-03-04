@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Connexion - Marvel 4 Fantastiques</title>
+    <link rel="stylesheet" href="logstyle.css" />
+  </head>
+ 
+  
+  <body>
+  
+    <div id="intro-image" class="intro-image">
+      <img src="public/img/MARVELOGO.PNG" alt="Introduction" />
+    </div>
+
+   
+    <video id="video" autoplay muted preload="auto">
+      <source src="public/sounds/accueilvideo.mp4" type="video/mp4" />
+      Votre navigateur ne supporte pas la lecture de vidéos.
+    </video>
+    <audio id="background-music" loop>
+      <source src="public/sounds/Marvel Comics Intro.mp3" type="audio/mp3" />
+      Votre navigateur ne supporte pas l'audio.
+    </audio>
+
+    <div id="image-container" class="hidden">
+      <img id="image" src="public/img/bgloging.PNG" alt="Image après la vidéo" />
+      <div class="buttons-container">
+        <a href="secondConnexion.html">
+          <button class="action-button">Connexion</button>
+        </a>
+        <a href="connexion.html">
+          <button class="action-button">S'inscrire</button>
+        </a>
+      </div>
+    </div>
+
+    <script>
+      const introImage = document.getElementById("intro-image");
+      const video = document.getElementById("video");
+      const imageContainer = document.getElementById("image-container");
+      const backgroundMusic = document.getElementById("background-music");
+
+      
+      video.style.display = "none";
+      imageContainer.style.display = "none";
+
+      
+      setTimeout(() => {
+        introImage.classList.add("fade-out");
+
+        
+        setTimeout(() => {
+          introImage.style.display = "none";
+          video.style.display = "block";
+          video.play().catch(function (error) {
+          });
+        }, 800); 
+      }, 1500); 
+
+      
+      video.addEventListener("ended",  () => {
+        backgroundMusic.pause();
+        video.style.display = "none";
+        imageContainer.style.display = "block";
+      });
+
+      
+
+// Play the music after interact 
+function playMusic() {
+  if (!backgroundMusic.paused || video.ended) return;
+  backgroundMusic.play().catch((error) => {
+  });
+}
+
+document.addEventListener("click", playMusic);
+document.addEventListener("keydown", playMusic);
+
+window.addEventListener("blur", () => {
+  backgroundMusic.pause();
+});
+      
+    </script>
+
+
+  </body>
+</html>
+</html>
